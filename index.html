@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TYS LEADS | CRM</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f4f9;
+      color: #263449;
+    }
+    header {
+      background: #142b4a;
+      color: white;
+      padding: 22px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    header h1 { margin: 0; font-size: 25px; }
+    header span { color: #e44b55; }
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 18px; }
+    .welcome { margin-bottom: 25px; }
+    .welcome h2 { margin-bottom: 5px; color: #142b4a; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    .card, .panel {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px #142b4a12;
+    }
+    .card small { color: #718096; }
+    .number { font-size: 30px; font-weight: bold; margin-top: 9px; color: #142b4a; }
+    .panel h3 { margin-top: 0; color: #142b4a; }
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    label { font-size: 13px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #d5dce6;
+      border-radius: 7px;
+      font-size: 14px;
+    }
+    textarea { min-height: 70px; }
+    button {
+      background: #e44852;
+      color: white;
+      border: 0;
+      padding: 13px 20px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #c93440; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th, td { padding: 12px; border-bottom: 1px solid #edf0f4; text-align: left; }
+    th { color: #718096; font-size: 12px; }
+    .status { color: #176b48; font-weight: bold; }
+    .full { grid-column: 1 / -1; }
+    footer { text-align: center; padding: 25px; color: #718096; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>TYS <span>LEADS</span></h1>
+  <div>CRM | TYS Asesores</div>
+</header>
+
+<main class="container">
+  <section class="welcome">
+    <h2>Panel de control</h2>
+    <p>Bienvenido a tu centro de seguimiento de prospectos.</p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <small>Total de prospectos</small>
+      <div class="number" id="total">0</div>
+    </div>
+    <div class="card">
+      <small>Nuevos prospectos</small>
+      <div class="number" id="nuevos">0</div>
+    </div>
+    <div class="card">
+      <small>En seguimiento</small>
+      <div class="number" id="seguimiento">0</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>＋ Registrar prospecto</h3>
+    <form id="prospectForm">
+      <div>
+        <label>Nombre completo</label>
+        <input id="nombre" required placeholder="Nombre del prospecto">
+      </div>
+      <div>
+        <label>Teléfono / WhatsApp</label>
+        <input id="telefono" required placeholder="Número de contacto">
+      </div>
+      <div>
+        <label>Correo electrónico</label>
+        <input id="correo" type="email" placeholder="Correo">
+      </div>
+      <div>
+        <label>Producto de interés</label>
+        <select id="producto">
+          <option>Seguro de auto</option>
+          <option>Gastos médicos</option>
+          <option>Seguro de vida</option>
+          <option>PPR / Ahorro</option>
+          <option>Pensiones</option>
+          <option>Seguros empresariales</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div>
+        <label>Origen</label>
+        <select id="origen">
+          <option>Facebook</option>
+          <option>Instagram</option>
+          <option>TikTok</option>
+          <option>WhatsApp</option>
+          <option>Recomendación</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div>
+        <label>Campaña</label>
+        <input id="campana" placeholder="Nombre de campaña">
+      </div>
+      <div>
+        <label>Estado</label>
+        <select id="estado">
+          <option>Nuevo</option>
+          <option>En seguimiento</option>
+          <option>Interesado</option>
+          <option>Cliente</option>
+          <option>No interesado</option>
+        </select>
+      </div>
+      <div>
+        <label>Asesor asignado</label>
+        <input id="asesor" placeholder="Nombre del asesor">
+      </div>
+      <div class="full">
+        <label>Notas</label>
+        <textarea id="notas" placeholder="Observaciones y próximos pasos"></textarea>
+      </div>
+      <div class="full">
+        <button type="submit">Guardar prospecto de prueba</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel" style="margin-top:25px">
+    <h3>Mis prospectos</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Producto</th>
+            <th>Origen</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="lista">
+          <tr><td colspan="5">Aún no hay registros en esta vista.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>TYS Asesores · TYS LEADS</footer>
+
+<script>
+  const registros = [];
+
+  document.getElementById("prospectForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const prospecto = {
+      nombre: document.getElementById("nombre").value,
+      telefono: document.getElementById("telefono").value,
+      producto: document.getElementById("producto").value,
+      origen: document.getElementById("origen").value,
+      estado: document.getElementById("estado").value
+    };
+
+    registros.push(prospecto);
+
+    document.getElementById("lista").innerHTML = registros.map(p => `
+      <tr>
+        <td>${p.nombre}</td>
+        <td>${p.telefono}</td>
+        <td>${p.producto}</td>
+        <td>${p.origen}</td>
+        <td class="status">${p.estado}</td>
+      </tr>
+    `).join("");
+
+    document.getElementById("total").textContent = registros.length;
+    document.getElementById("nuevos").textContent =
+      registros.filter(p => p.estado === "Nuevo").length;
+    document.getElementById("seguimiento").textContent =
+      registros.filter(p => p.estado === "En seguimiento").length;
+
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
